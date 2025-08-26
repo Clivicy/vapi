@@ -28,6 +28,20 @@ A modular Voice AI backend scaffold using Node.js, Express, TypeScript, and Mong
    npm start
    ```
 
+## Docker Usage
+
+Build the Docker image:
+
+```
+docker build -t vapi-backend .
+```
+
+Run the container (set environment variables as needed):
+
+```
+docker run -p 4000:4000 --env-file .env vapi-backend
+```
+
 ## Directory Structure
 - `src/` - Source code
 - `src/agents/` - Agent CRUD logic

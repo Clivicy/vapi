@@ -3,16 +3,17 @@ dotenv.config();
 
 import app from './app';
 import connectDB from './config/db';
+import logger from './config/logger';
 
 const PORT = process.env.PORT || 4000;
 
 connectDB()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      logger.info(`Server running on port ${PORT}`);
     });
   })
   .catch((err) => {
-    console.error('Failed to connect to DB', err);
+    logger.error('Failed to connect to DB', err);
     process.exit(1);
   });

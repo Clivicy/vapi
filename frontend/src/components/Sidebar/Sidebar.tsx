@@ -1,51 +1,48 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { createPortal } from "react-dom";
+import { BookTextIcon, ChartSplineIcon, ChevronsUpDownIcon, DollarSignIcon, FileClockIcon, FolderClockIcon, FolderOpenIcon, KeyRoundIcon, LayoutDashboardIcon, LockKeyholeIcon, MessageCircleMore, Mic, MoreHorizontal, NetworkIcon, PanelLeftClose, PanelLeftIcon, PanelLeftOpen, Phone, PhoneOutgoingIcon, PlayIcon, SearchIcon, SquareIcon, UnplugIcon, UserRound, Users2Icon, WebhookIcon, Wrench, WrenchIcon } from "lucide-react";
 
 // SVG icon components (monochrome, black/white)
 const icons = {
   overview: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" className="stroke-zinc-400 group-hover:stroke-violet-400"/><rect x="14" y="3" width="7" height="7" className="stroke-zinc-400 group-hover:stroke-violet-400"/><rect x="14" y="14" width="7" height="7" className="stroke-zinc-400 group-hover:stroke-violet-400"/><rect x="3" y="14" width="7" height="7" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <LayoutDashboardIcon className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   assistants: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" className="stroke-zinc-400 group-hover:stroke-violet-400"/><path d="M4 20c0-2.2 3.6-4 8-4s8 1.8 8 4" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <UserRound className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   tools: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14.7 6.3l3 3M2 22l7-7m2-2l7-7m-7 7l-3-3m3 3l3 3" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <Wrench className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   phone: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 0 1-1.09 1A19 19 0 0 1 3 5.09 1 1 0 0 1 4 4h4.09a1 1 0 0 1 1 .75l1.13 4.52a1 1 0 0 1-.29 1L8.21 12.21a16 16 0 0 0 7.58 7.58l1.94-1.94a1 1 0 0 1 1-.29l4.52 1.13a1 1 0 0 1 .75 1V21z" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <Phone className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   voice: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 3v18m6-9a6 6 0 0 1-12 0" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <Mic className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   apikeys: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" className="stroke-zinc-400 group-hover:stroke-violet-400"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06A1.65 1.65 0 0 0 15 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 8.6 15a1.65 1.65 0 0 0-1.82-.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 8.6a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 15.4 9a1.65 1.65 0 0 0 1.82.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 15z" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <LockKeyholeIcon className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   metrics: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 17v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6m4 0v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <ChartSplineIcon className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   tests: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" className="stroke-zinc-400 group-hover:stroke-violet-400"/><path d="M8 2v4m8-4v4" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <PlayIcon className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   logs: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" className="stroke-zinc-400 group-hover:stroke-violet-400"/><path d="M8 9h8m-8 4h6" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <BookTextIcon className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   chat: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <MessageCircleMore className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   session: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" className="stroke-zinc-400 group-hover:stroke-violet-400"/><path d="M9 9h6v6H9z" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
-  ),
+    <FolderClockIcon className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
+  ),  
   more: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2" className="stroke-zinc-400 group-hover:stroke-violet-400"/><circle cx="12" cy="12" r="2" className="stroke-zinc-400 group-hover:stroke-violet-400"/><circle cx="19" cy="12" r="2" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
+    <MoreHorizontal className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
-  chevronLeft: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
-  ),
-  chevronRight: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" className="stroke-zinc-400 group-hover:stroke-violet-400"/></svg>
-  ),
+  collapse: <PanelLeftClose className="w-5 h-5 stroke-zinc-700 dark:stroke-zinc-300 group-hover:stroke-violet-400" />,
+  expand: <PanelLeftOpen className="w-5 h-5 stroke-zinc-700 dark:stroke-zinc-300 group-hover:stroke-violet-400" />,
 };
 
 const navLinks = [
@@ -68,22 +65,22 @@ const observeLinks = [
 
 const moreDropdownIcons = {
   Workflows: (
-    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M7 7h10M7 12h4m-4 5h10"/><circle cx="4" cy="7" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="4" cy="17" r="2"/></svg>
+    <NetworkIcon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   Outbound: (
-    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 0 1-1.09 1A19 19 0 0 1 3 5.09 1 1 0 0 1 4 4h4.09a1 1 0 0 1 1 .75l1.13 4.52a1 1 0 0 1-.29 1L8.21 12.21a16 16 0 0 0 7.58 7.58l1.94-1.94a1 1 0 0 1 1-.29l4.52 1.13a1 1 0 0 1 .75 1V21z"/></svg>
+    <PhoneOutgoingIcon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   Files: (
-    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 8h16"/></svg>
+    <FolderOpenIcon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   Squads: (
-    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="17" r="3"/></svg>
+    <Users2Icon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   Integrations: (
-    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>
+    <UnplugIcon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
   "Customize sidebar": (
-    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+    <PanelLeftIcon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
   ),
 };
 
@@ -227,13 +224,13 @@ const Sidebar = () => {
 
   const observeMoreDropdownIcons = {
     "API Logs": (
-      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 3v18m6-9a6 6 0 0 1-12 0"/></svg>
+      <KeyRoundIcon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
     ),
     "Webhook Logs": (
-      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 17a4 4 0 1 0-8 0"/><path d="M12 3v14"/><path d="M12 21v-2"/></svg>
+      <WebhookIcon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
     ),
     "Customize sidebar": (
-      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+      <PanelLeftIcon className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
     ),
   };
 
@@ -256,7 +253,7 @@ const Sidebar = () => {
             onClick={() => setCollapsed((c) => !c)}
             title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
-            {collapsed ? icons.chevronRight : icons.chevronLeft}
+            {collapsed ? icons.expand : icons.collapse}
           </button>
         </div>
       </div>
@@ -271,9 +268,7 @@ const Sidebar = () => {
               onClick={() => setDropdownOpen((v) => !v)}
               aria-label="Open organization menu"
             >
-              <svg className={`w-4 h-4 text-zinc-400 dark:text-zinc-500 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
+              <ChevronsUpDownIcon className={`w-4 h-4 text-zinc-400 dark:text-zinc-500 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" />
             </button>
             {/* Dropdown menu */}
             {dropdownOpen && (
@@ -322,9 +317,7 @@ const Sidebar = () => {
               className="flex items-center justify-center w-8 h-8 rounded hover:bg-zinc-200 dark:hover:bg-zinc-800 transition"
               title="Search"
             >
-              <svg className="w-4 h-4 text-zinc-500 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+              <SearchIcon className="w-4 h-4 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" />
             </button>
           </div>
         ) : (
@@ -486,11 +479,9 @@ const Sidebar = () => {
       {/* Credits and Buy Button */}
       <div className={`px-4 py-4 border-t border-zinc-200 dark:border-zinc-800 flex-shrink-0 flex flex-col gap-2 ${collapsed ? "items-center px-2" : ""}`}>
         <div className="w-full">
-          <div className={`flex items-center justify-between mb-2 ${collapsed ? "justify-center" : ""}`}>
+          <div className={`flex items-center mb-2 ${collapsed ? "justify-center" : ""}`}>
             {collapsed ? (
-              <svg className="w-4 h-4 text-zinc-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-              </svg>
+              <DollarSignIcon className="w-4 h-4 text-zinc-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" />
             ) : (
               <>
                 <span className="text-xs text-zinc-400 dark:text-zinc-500">PAYG</span>

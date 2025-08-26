@@ -16,11 +16,21 @@ import authRoutes from './auth/auth.routes';
 import { errorHandler } from './middleware/errorHandler';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import logger from './config/logger';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(helmet());
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+}));
 
 app.use('/api/agents', agentRoutes);
 app.use('/api/voices', voiceRoutes);
