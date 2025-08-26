@@ -247,7 +247,12 @@ const Sidebar = () => {
       {/* Logo, Collapse Button */}
       <div className={`flex items-center gap-2 px-4 py-4 border-b border-zinc-200 dark:border-zinc-800 flex-shrink-0 ${collapsed ? "justify-center" : "justify-between"}`}>
         <div className="flex items-center gap-2 justify-between w-full">
-          {!collapsed && <div className="text-2xl font-extrabold tracking-tight">VAPI</div>}
+          {!collapsed && (
+            <div className="flex items-center gap-2">
+              <img src="/public/icon.png" alt="Site icon" className="w-8 h-8" />
+              <div className="text-2xl font-extrabold tracking-tight">VAPI</div>
+            </div>
+          )}
           <button
             className="flex items-center justify-center w-8 h-8 rounded hover:bg-zinc-200 dark:hover:bg-zinc-800 transition"
             onClick={() => setCollapsed((c) => !c)}
