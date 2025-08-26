@@ -356,9 +356,9 @@ const Sidebar = () => {
       <nav className="flex-1 overflow-y-auto px-2">
         {/* BUILD section */}
         <div className="">
-          {!collapsed && (
-            <div className="text-xs font-bold text-zinc-500 px-2 mb-1 mt-2">BUILD</div>
-          )}
+          <div className={`text-xs font-bold text-zinc-500 px-2 mb-1 mt-2 ${collapsed ? "text-center" : ""}`}>
+            {collapsed ? <span className="invisible">BUILD</span> : "BUILD"}
+          </div>
           <ul className="space-y-1">
             {navLinks.slice(1, 6).map((item) => (
               <li key={item.label} className="group relative">
@@ -418,9 +418,9 @@ const Sidebar = () => {
         </div>
         {/* OBSERVE section */}
         <div className="mb-4">
-          {!collapsed && (
-            <div className="text-xs font-bold text-zinc-500 px-2 mb-1 mt-2">OBSERVE</div>
-          )}
+          <div className={`text-xs font-bold text-zinc-500 px-2 mb-1 mt-2 ${collapsed ? "text-center" : ""}`}>
+            {collapsed ? <span className="invisible">OBSERVE</span> : "OBSERVE"}
+          </div>
           <ul className="space-y-1">
             {observeLinks.slice(0, 5).map((item) => (
               <li key={item.label} className="group relative">
