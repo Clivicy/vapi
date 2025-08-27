@@ -72,8 +72,8 @@ const CreateAssistantModal: React.FC<CreateAssistantModalProps> = ({
       <div className="space-y-4 mx-4">
         {/* Choose a template section */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-2">Choose a template</h3>
-          <p className="text-gray-400 text-sm mb-4">
+          <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">Choose a template</h3>
+          <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
             Here's a few templates to get you started, or you can create your own template and use it to create a new assistant.
           </p>
         </div>
@@ -81,13 +81,13 @@ const CreateAssistantModal: React.FC<CreateAssistantModalProps> = ({
         {/* Assistant Name */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <label className="text-white font-medium">Assistant Name</label>
+            <label className="text-zinc-900 dark:text-zinc-100 font-medium">Assistant Name</label>
             <span className="text-orange-400 text-xs">(This can be adjusted at any time after creation.)</span>
           </div>
           <input
             type="text"
             onChange={(e) => setAssistantName(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-zinc-100 dark:bg-zinc-900 border border-zinc-600 rounded-md text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
             placeholder="New Assistant"
           />
         </div>
@@ -106,8 +106,8 @@ const CreateAssistantModal: React.FC<CreateAssistantModalProps> = ({
               
                 <PlusCircleIcon className="w-8 h-8 text-zinc-500" />
               <div>
-                <h4 className="text-white font-medium text-md">Blank Template</h4>
-                <p className="text-gray-400 text-xs mt-1">
+                <h4 className="text-zinc-900 dark:text-zinc-100 font-medium text-md">Blank Template</h4>
+                <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-1">
                   This blank slate template with minimal configurations. It's a starting point for creating your custom assistant.
                 </p>
               </div>
@@ -128,8 +128,8 @@ const CreateAssistantModal: React.FC<CreateAssistantModalProps> = ({
                 }`}
                 onClick={() => setSelectedTemplate(template.id)}
               >
-                <h5 className="text-white font-medium text-sm">{template.title}</h5>
-                <p className="text-gray-400 text-xs mt-1 line-clamp-2">
+                <h5 className="text-zinc-900 dark:text-zinc-100 font-medium text-sm">{template.title}</h5>
+                <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-1 line-clamp-2">
                   {template.description}
                 </p>
               </div>
@@ -142,14 +142,14 @@ const CreateAssistantModal: React.FC<CreateAssistantModalProps> = ({
           <Button
             variant="secondary"
             onClick={onClose}
-            className="px-6"
+            className="px-6 bg-zinc-100 font-bold dark:bg-zinc-900 border border-zinc-600 text-zinc-900 dark:text-zinc-100 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
           >
             Close
           </Button>
           <Button
             variant="primary"
             onClick={handleCreate}
-            className="px-6 bg-green-600 hover:bg-green-700"
+            className="px-6 bg-violet-500 font-bold dark:bg-violet-500 text-white rounded-md hover:bg-violet-700 dark:hover:bg-violet-600 transition-colors"
           >
             Create Assistant
           </Button>

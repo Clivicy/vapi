@@ -3,6 +3,7 @@ import { apiFetch } from "../api";
 import { FolderIcon, PlusIcon, ScanFaceIcon, SettingsIcon } from "lucide-react";
 import { Button, SearchBar } from "../components/ui";
 import CreateAssistantModal from "../components/CreateAssistantModal";
+import { CreateFolderDialog } from "../components/CreateFolderDialog";
 
 interface Agent {
   _id: string;
@@ -21,6 +22,7 @@ const Assistants = () => {
   const [activeTab, setActiveTab] = useState("Widget");
   const [searchTerm, setSearchTerm] = useState("");
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isCreateFolderDialogOpen, setIsCreateFolderDialogOpen] = useState(false);
 
   useEffect(() => {
     fetchAgents();
@@ -66,6 +68,11 @@ const Assistants = () => {
     }
   };
 
+  const handleCreateFolder = (folderName: string) => {
+    // TODO: Implement folder creation logic
+    console.log("Creating folder:", folderName);
+  };
+
   if (loading) return <div className="flex items-center justify-center h-screen bg-zinc-900 text-white">Loading assistants...</div>;
   if (error) return <div className="text-red-500 p-8 bg-zinc-900 text-white">Error: {error}</div>;
 
@@ -92,7 +99,10 @@ const Assistants = () => {
               <PlusIcon className="w-4 h-4" strokeWidth={2}  />
               Create Assistant
             </Button>
-            <button className=" text-black dark:text-zinc-100 px-4 py-2  flex items-center gap-2 self-start">
+            <button 
+              className="text-black dark:text-zinc-100 px-4 py-2 flex items-center gap-2 self-start hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md transition-colors"
+              onClick={() => setIsCreateFolderDialogOpen(true)}
+            >
               <FolderIcon className="w-4 h-4" strokeWidth={2}  />
             </button>
           </div>
@@ -113,6 +123,13 @@ const Assistants = () => {
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onCreateAssistant={handleCreateAssistant}
+      />
+
+      {/* Create Folder Dialog */}
+      <CreateFolderDialog
+        isOpen={isCreateFolderDialogOpen}
+        onClose={() => setIsCreateFolderDialogOpen(false)}
+        onCreateFolder={handleCreateFolder}
       />
     </div>
   );
